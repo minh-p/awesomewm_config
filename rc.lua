@@ -46,6 +46,7 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme/theme.lua")
+beautiful.wibar_width = ""
 
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
@@ -92,6 +93,7 @@ myawesomemenu = {
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
                                     { "open terminal", terminal },
+                                    { "search for program", "rofi -show drun" },
                                     { "open firefox", "firefox" },
                                     { "open htop", "alacritty -e htop" },
                                   }
@@ -203,53 +205,50 @@ awful.screen.connect_for_each_screen(function(s)
                 halign = 'center',
                 widget = wibox.container.place
             },
-            layout = wibox.layout.fixed.horizontal
+            layout = wibox.layout.fixed.vertical
         }
     }
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s, x = 0, y = 0, width = 1500 , height = 25})
+    s.mywibox = awful.wibar({ position = "bottom", screen = s, x = 0, y = 0, width = 150 , height = 25})
 
     -- Add widgets to the wibox
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            mylauncher,
             s.mytaglist,
-            s.mypromptbox,
-        },
-        s.mytasklist, -- Middle widget
-        { -- Right widgets
-            layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
-            wibox.widget.systray(),
-            mytextclock,
-            -- wibox.widget {
-            --     date         = os.date('*t'),
-            --     font         = 'Monospace 8',
-            --     spacing      = 2,
-            --     week_numbers = false,
-            --     start_sunday = false,
-            --     widget       = wibox.widget.calendar.month
-            -- },
         },
     }
+    s.myStatusWibox = awful.wibar({position = "top", screen = s, x = 0, y = 0, width = 110, height = 25})
+
+    s.myStatusWibox:setup({
+        layout = wibox.layout.align.horizontal,
+        {
+            layout = wibox.layout.fixed.horizontal,
+            mykeyboardlayout,
+            mytextclock,
+        },
+        widget = wibox.container.margin
+    })
 
     s.launcherwibox = awful.wibar{position="left", screen = s, x=0,y=0, width = 25}
     s.launcherwibox:setup {
         layout = wibox.layout.align.vertical,
         { -- Left widgets
             layout = wibox.layout.fixed.vertical,
+            wibox.layout.margin(mylauncher, 3, 0, 3, 8),
             s.mypromptbox,
             direction = "west",
-            widget = wibox.container.rotate
+            widget = wibox.container.rotate,
+            s.mytasklist,
         },
         {
             layout = wibox.layout.fixed.vertical
         },
         { -- Right widgets
             layout = wibox.layout.fixed.vertical,
+            wibox.widget.systray(),
             s.mylayoutbox,
             direction = "west",
 
