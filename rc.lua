@@ -174,7 +174,7 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- App launcher bar
     -- Each screen has its own tag table.
-    awful.tag({"", "", "", "", "", "", ""}, s, awful.layout.layouts[1])
+    awful.tag({"", "", "", "1", "2", "3", "4"}, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -344,7 +344,8 @@ awful.rules.rules = {
     -- { rule = { class = "Firefox" },
     --   properties = { screen = 1, tag = "2" } },
     { rule = {instance = "discord" }, properties = { tag = "", screen = 2}},
-    { rule = {instance = "notion-app" }, properties = { tag = "", screen = 2}},
+    { rule = {instance = "notion-app" }, properties = {screen = 2}},
+    { rule = {instance = "todoist" }, properties = {screen = 2}},
 }
 -- }}}
 
