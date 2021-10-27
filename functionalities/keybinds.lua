@@ -3,6 +3,7 @@
 local gears = require("gears")
 local awful = require("awful")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
+local ProductivitySetup = require("workflow-scripts.ProductivitySetup")
 
 local modkey = "Mod4"
 
@@ -99,7 +100,13 @@ globalkeys = gears.table.join(
 
     -- Menubar
     awful.key({ modkey }, "p", function() awful.spawn.with_shell("rofi -show drun") end,
-              {description = "show the menubar", group = "launcher"})
+              {description = "show the menubar", group = "launcher"}),
+
+    awful.key({ modkey, "Shift" }, "p", function() awful.spawn.with_shell("rofi -show window") end,
+              {description = "show the windows running", group = "launcher"}),
+    -- Productivity Mode Start
+    awful.key({ modkey, "Shift", "Control"}, "1", function() ProductivitySetup.classroom:run() end,
+        {description = "setup productivity for classroom", group = "Launcher"})
 )
 
 clientkeys = gears.table.join(

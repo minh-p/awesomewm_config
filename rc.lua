@@ -210,23 +210,23 @@ awful.screen.connect_for_each_screen(function(s)
     }
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "bottom", screen = s, x = 0, y = 0, width = 150 , height = 25})
+    s.mywibox = awful.wibar({ position = "bottom", screen = s, x = 0, y = 0, width = 200 , height = 30})
 
     -- Add widgets to the wibox
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            s.mytaglist,
+            wibox.container.place(s.mytaglist, "center", "center"),
         },
     }
-    s.myStatusWibox = awful.wibar({position = "top", screen = s, x = 0, y = 0, width = 110, height = 25})
+    s.myStatusWibox = awful.wibar({position = "top", screen = s, x = 0, y = 0, width = 94, height = 25})
 
     s.myStatusWibox:setup({
         layout = wibox.layout.align.horizontal,
         {
             layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
+            --mykeyboardlayout,
             mytextclock,
         },
         widget = wibox.container.margin
@@ -343,6 +343,8 @@ awful.rules.rules = {
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { screen = 1, tag = "2" } },
+    { rule = {instance = "discord" }, properties = { tag = "", screen = 2}},
+    { rule = {instance = "notion-app" }, properties = { tag = "", screen = 2}},
 }
 -- }}}
 
