@@ -40,9 +40,9 @@ end
 -- List of productivities here
 ProductivitySetup.Productivity:new("classroom", {
     {command = "firefox classroom.google.com", position = {tag="", screen = 1}},
-    {command = "firefox todoist.com", position = {tag="", screen = 2}},
     {command = "notion-app", position = {tag="", screen = 2}},
-    {command = "discord"}
+    {command = "todoist", position = {tag="", screen = 2}},
+    --command = "discord"}
 })
 
 return ProductivitySetup
