@@ -210,7 +210,7 @@ awful.screen.connect_for_each_screen(function(s)
     }
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "bottom", screen = s, x = 0, y = 0, width = 200 , height = 30})
+    s.mywibox = awful.wibar({ position = "bottom", screen = s, x = 0, y = 0, width = 240 , height = 30})
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -344,8 +344,8 @@ awful.rules.rules = {
     -- { rule = { class = "Firefox" },
     --   properties = { screen = 1, tag = "2" } },
     { rule = {instance = "discord" }, properties = { tag = "", screen = 2}},
-    { rule = {instance = "notion-app" }, properties = {screen = 2}},
-    { rule = {instance = "todoist" }, properties = {screen = 2}},
+    { rule = {instance = "notion-app" }, properties = { tag = "", screen = 2}},
+    { rule = {instance = "todoist" }, properties = { tag = "", screen = 2}},
 }
 -- }}}
 
