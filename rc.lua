@@ -49,7 +49,7 @@ beautiful.init(gears.filesystem.get_configuration_dir() .. "theme/theme.lua")
 beautiful.wibar_width = ""
 
 -- This is used later as the default terminal and editor to run.
-terminal = "alacritty"
+terminal = "kitty"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -95,7 +95,7 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                                     { "open terminal", terminal },
                                     { "search for program", "rofi -show drun" },
                                     { "open firefox", "firefox" },
-                                    { "open htop", "alacritty -e htop" },
+                                    { "open htop", "kitty -e htop" },
                                   }
                         })
 
@@ -220,7 +220,7 @@ awful.screen.connect_for_each_screen(function(s)
             wibox.container.place(s.mytaglist, "center", "center"),
         },
     }
-    s.myStatusWibox = awful.wibar({position = "top", screen = s, x = 0, y = 0, width = 94, height = 25})
+    s.myStatusWibox = awful.wibar({position = "top", screen = s, x = 0, y = 0, width = 85, height = 25})
 
     s.myStatusWibox:setup({
         layout = wibox.layout.align.horizontal,
@@ -231,6 +231,10 @@ awful.screen.connect_for_each_screen(function(s)
         },
         widget = wibox.container.margin
     })
+
+    s.systray = wibox.widget.systray()
+    s.systray:set_horizontal(false)
+    s.systray:set_base_size(20)
 
     s.launcherwibox = awful.wibar{position="left", screen = s, x=0,y=0, width = 25}
     s.launcherwibox:setup {
@@ -248,7 +252,7 @@ awful.screen.connect_for_each_screen(function(s)
         },
         { -- Right widgets
             layout = wibox.layout.fixed.vertical,
-            wibox.widget.systray(),
+            s.systray,
             s.mylayoutbox,
             direction = "west",
 
@@ -346,6 +350,7 @@ awful.rules.rules = {
     { rule = {instance = "discord" }, properties = { tag = "", screen = 2}},
     { rule = {instance = "notion-app" }, properties = { tag = "", screen = 2}},
     { rule = {instance = "todoist" }, properties = { tag = "", screen = 2}},
+    { rule = {instance = "notion-app" }, properties = { tag = "", screen = 2}},
 }
 -- }}}
 
