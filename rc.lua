@@ -220,7 +220,7 @@ awful.screen.connect_for_each_screen(function(s)
             wibox.container.place(s.mytaglist, "center", "center"),
         },
     }
-    s.myStatusWibox = awful.wibar({position = "top", screen = s, x = 0, y = 0, width = 85, height = 25})
+    s.myStatusWibox = awful.wibar({position = "top", screen = s, x = 0, y = 0, width = 100, height = 25})
 
     s.myStatusWibox:setup({
         layout = wibox.layout.align.horizontal,
